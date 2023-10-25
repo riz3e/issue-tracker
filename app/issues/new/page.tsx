@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createIssueSchema } from '@/app/createIssueSchema';
 import z from 'zod';
 import ErrorMessage from '@/app/components/errormessage';
+import LoadingDots from '@/app/components/Loading';
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 const NewIssuePage = () => {
@@ -15,6 +16,7 @@ const NewIssuePage = () => {
     });
     const router = useRouter();
     const [error, setError] = useState('')
+    const [isSubmitting, setSumbitting] = useState(false);
 
     return (
         <div className='max-w-xl mx-auto'>
@@ -23,9 +25,10 @@ const NewIssuePage = () => {
                 try {
                     await axios.post('/api/issues', data)
                     router.push('/issues')
+                    setSumbitting(true);
                 } catch (error) {
                     setError("Unexpected error occured.");
-
+                    setSumbitting(false)
                 }
             })}>
                 < div className="form-control w-full max-w-xl">
@@ -56,7 +59,7 @@ const NewIssuePage = () => {
                 <ErrorMessage>
                     {errors.description?.message}
                 </ErrorMessage>
-                <button className="btn btn-outline btn-primary">Submit new issue</button>
+                <button disabled = {isSubmitting} className="btn btn-outline btn-primary">Submit new issue {isSubmitting && <LoadingDots />}</button>
             </form>
         </div>
     )
