@@ -34,7 +34,7 @@ const NewIssuePage = () => {
                 < div className="form-control w-full max-w-xl">
                     <label className="label">
                         <span className="label-text">New issue</span>
-                        <span className="label-text-alt">Almas gay</span>
+                        {/* <span className="label-text-alt">Almas gay</span> */}
                     </label>
                     <input type="text" placeholder="Type here" {...register('title')}
                         className="input input-bordered w-full" />
