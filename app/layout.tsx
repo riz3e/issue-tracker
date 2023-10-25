@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en" data-theme='coffee'>
       <body className={inter.className}>
         <NavBar />
-        <main>{children}</main>
+        <main className='p-7'>{children}</main>
         </body>
     </html>
   )
